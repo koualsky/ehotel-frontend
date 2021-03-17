@@ -153,7 +153,7 @@ export default class Booking extends React.Component {
             booking["reservation_to"],
             booking["rooms"],
         )}>Edit</button>
-        <button value={booking["id"]} onClick={this.handleRoomDelete}>Delete</button>
+        <button value={booking["id"]} onClick={this.handleBookingDelete}>Delete</button>
         <span>
           {this.state.booking_for_edit == booking["id"] ? (
             <div>
