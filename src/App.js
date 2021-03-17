@@ -69,13 +69,12 @@ export default class App extends React.Component {
         <form>
           <label>
               Room number:
-              <input type="text" name="room_number" id="room_number" onChange={this.handleRoomNumber} />
+              <input type="text" name="room_number" id="room_number" placeholder="303" onChange={this.handleRoomNumber} />
           </label>
           <label>
               Room class:
-              {/*<input type="text" name="room_class" id="room_class" onChange={this.handleRoomClass} />*/}
               <select id="room_class" onChange={this.handleRoomClass}>
-                <option value="A">A</option>
+                <option value="A" selected>A</option>
                 <option value="B">B</option>
                 <option value="C">C</option>
                 <option value="D">D</option>
