@@ -150,7 +150,7 @@ export default class Rooms extends React.Component {
                 </Col>
                 <Col md={2}>
                   <FormGroup>
-                    <Label for="add">Add</Label>
+                    <Label for="add">Save</Label>
                       <Button color="success" block value={room["id"]} onClick={this.handleRoomEditPost}>Save</Button>
                   </FormGroup>
                 </Col>

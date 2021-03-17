@@ -207,8 +207,8 @@ export default class Booking extends React.Component {
                   </Col>
                   <Col md={2}>
                       <FormGroup className="mb-0">
-                          <Label for="add">Add</Label>
-                          <Button color="success" block value={booking["id"]} onClick={this.handleBookingEditPost}>Add</Button>
+                          <Label for="add">Save</Label>
+                          <Button color="success" block value={booking["id"]} onClick={this.handleBookingEditPost}>Save</Button>
                       </FormGroup>
                   </Col>
               </Row>
