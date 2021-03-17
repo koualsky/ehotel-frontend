@@ -4,11 +4,20 @@ import './index.css';
 import Rooms from './Rooms';
 import Booking from './Booking';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Rooms />
-    <Booking />
+      <div className="container">
+          <div className="row">
+              <div className="col p-5 text-right" style={{borderRight: "1px solid lightgrey"}}>
+                  <Rooms />
+              </div>
+              <div className="col p-5 ">
+                  <Booking />
+              </div>
+          </div>
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

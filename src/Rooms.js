@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Rooms.css';
 import axios from 'axios';
-import { UncontrolledCollapse, Button, CardBody, Card } from 'reactstrap';
+import { UncontrolledCollapse, Button, CardBody, Card, Input, InputGroup, InputGroupAddon, InputGroupText, Label, Row, Col, FormGroup } from 'reactstrap';
 
 let backend_url = 'https://eeehotel.herokuapp.com/api/'
 
@@ -111,32 +111,50 @@ export default class Rooms extends React.Component {
 
   render() {
 
-    const listRooms = this.state.rooms.map((room) => <li key={room["id"]}>
-        room: {room["room_number"]},
-        class: {room["room_class"]},
-        price: {room["price"]}
+    const listRooms = this.state.rooms.map((room) => <li key={room["id"]} class="list-group-item">
 
-        <button value={room["id"]} onClick={(event) => this.handleRoomEditTrigger(event, room["room_number"], room["room_class"])}>Edit</button>
-        <button value={room["id"]} onClick={this.handleRoomDelete}>Delete</button>
+        <Row form className="pt-0 pb-0 text-muted">
+            <Col md={8} className="d-flex align-items-center">
+                room: {room["room_number"]},
+                class: {room["room_class"]},
+                price: {room["price"]}
+            </Col>
+            <Col md={2}>
+                <Button color="primary" value={room["id"]} onClick={(event) => this.handleRoomEditTrigger(event, room["room_number"], room["room_class"])}>Edit</Button>
+            </Col>
+            <Col md={2}>
+                <Button color="danger" value={room["id"]} onClick={this.handleRoomDelete}>Delete</Button>
+            </Col>
+        </Row>
+
         <span>
           {this.state.room_for_edit == room["id"] ? (
             <div>
-              <form>
-                <label>
-                    Room number:
-                    <input type="text" name="room_number" id="room_number_edit" value={this.state.room_number} onChange={this.handleRoomNumber} />
-                </label>
-                <label>
-                    Room class:
-                    <select id="room_class_edit" onChange={this.handleRoomClass}>
-                      {room["room_class"] == "A" ? <option value="A" selected="selected">A</option> : <option value="A">A</option>}
-                      {room["room_class"] == "B" ? <option value="B" selected="selected">B</option> : <option value="B">B</option>}
-                      {room["room_class"] == "C" ? <option value="C" selected="selected">C</option> : <option value="C">C</option>}
-                      {room["room_class"] == "D" ? <option value="D" selected="selected">D</option> : <option value="D">D</option>}
-                    </select>
-                </label>
-                <button type="button" value={room["id"]} onClick={this.handleRoomEditPost}>Save</button>
-              </form>
+              <Row form className="pt-2 pb-1 text-muted">
+                <Col md={8}>
+                  <FormGroup>
+                    <Label for="roomNumber">Room number</Label>
+                    <Input name="room_number" id="room_number_edit" value={this.state.room_number} onChange={this.handleRoomNumber} />
+                  </FormGroup>
+                </Col>
+                <Col md={2}>
+                  <FormGroup>
+                    <Label for="class">Class</Label>
+                    <Input type="select" name="select" id="room_class_edit" onChange={this.handleRoomClass}>
+                      {room["room_class"] == "A" ? <option selected="selected">A</option> : <option>A</option>}
+                      {room["room_class"] == "B" ? <option selected="selected">B</option> : <option>B</option>}
+                      {room["room_class"] == "C" ? <option selected="selected">C</option> : <option>C</option>}
+                      {room["room_class"] == "D" ? <option selected="selected">D</option> : <option>D</option>}
+                    </Input>
+                  </FormGroup>
+                </Col>
+                <Col md={2}>
+                  <FormGroup>
+                    <Label for="add">Add</Label>
+                      <Button color="success" block value={room["id"]} onClick={this.handleRoomEditPost}>Save</Button>
+                  </FormGroup>
+                </Col>
+              </Row>
             </div>
           ) : (
             // <LoginButton onClick={this.handleLoginClick} />
@@ -148,29 +166,42 @@ export default class Rooms extends React.Component {
     return (
       <div>
 
-        <h1>Rooms</h1>
+        <h3 className="pt-4 text-muted">Add room</h3>
 
-        <form>
-          <label>
-              Room number:
-              <input type="text" name="room_number" id="room_number" placeholder="303" onChange={this.handleRoomNumber} />
-          </label>
-          <label>
-              Room class:
-              <select id="room_class" onChange={this.handleRoomClass}>
-                <option value="A" selected>A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-              </select>
-          </label>
-          <input type="button" value="Add" onClick={this.handleRoomPost} />
-        </form>
+        <Row form className="text-muted">
+        <Col md={8}>
+          <FormGroup className="mb-0">
+            <Label for="roomNumber">Room number</Label>
+            <Input name="room_number" id="room_number" placeholder="303" onChange={this.handleRoomNumber} />
+          </FormGroup>
+        </Col>
+        <Col md={2}>
+          <FormGroup className="mb-0">
+            <Label for="class">Class</Label>
+            <Input type="select" name="select" id="room_class" onChange={this.handleRoomClass}>
+              <option>A</option>
+              <option>B</option>
+              <option>C</option>
+              <option>D</option>
+            </Input>
+          </FormGroup>
+        </Col>
+        <Col md={2}>
+          <FormGroup className="mb-0">
+            <Label for="add">Add</Label>
+              <Button color="success" block onClick={this.handleRoomPost}>Add</Button>
+          </FormGroup>
+        </Col>
+      </Row>
+
+
 
         {/*This line below will show only when we receive error, like existing room */}
         <p>{this.state.room_warning}</p>
 
-        <ul className="fortest">{listRooms}</ul>
+        <h3 className="pt-5 text-muted">Available Rooms</h3>
+
+        <ul className="list-group">{listRooms}</ul>
 
         {/*<button onClick={this.getRooms}>Get rooms</button>*/}
 
